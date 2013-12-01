@@ -5,9 +5,7 @@
 __author__ = "Razique Mahroua"
 __copyright__ = "Copyright 20459, Planet GC-1450"
 
-from game_manager import Utils
 from scenes import SceneManager
-
 
 class Engine(object):
     def __init__(self):
@@ -20,5 +18,4 @@ class Engine(object):
 
 # We launch the game!
 game = Engine()
-
-game.start("The Jetroom")
+game.start("Intro")
