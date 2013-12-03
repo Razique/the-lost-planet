@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 """The-lost-planet.py: A text-based interactive game."""
 
 __author__ = "Razique Mahroua"
