@@ -6,15 +6,21 @@ __copyright__ = "Copyright 20459, Planet GC-1450"
 
 from scenes import SceneManager
 
-class Engine(object):
+
+class Engine(object, ):
     def __init__(self):
         pass
 
     # Scene init.
     @staticmethod
-    def start(scene):
-        SceneManager(scene)
+    def start(scene, test=False):
+        if test is False:
+            SceneManager(scene)
+        else:
+            init = SceneManager(scene)
+            return init.no_scene()
 
 # We launch the game!
-game = Engine()
-game.start("Intro")
+if __name__ == "__main__":
+    game = Engine()
+    game.start("Intro")

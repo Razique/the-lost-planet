@@ -11,46 +11,51 @@ from sys import exit
 
 class SceneManager(object):
     def __init__(self, next_scene):
-        # We init. this value.
-        # Depending where the user goes
-        # he may have the code or not.
         self.next_scene = next_scene
         self.restart = False
+        # We instantiate the class Utils and Engine
+        # in order to access to the items collection.)
 
         if next_scene in "Intro":
-            Intro()
+            Intro().launcher()
             exit(0)
         elif next_scene in "The Base":
-            TheBase()
+            TheBase().launcher()
             exit(0)
         elif next_scene in "The Alley":
-            TheAlley()
+            TheAlley().launcher()
             exit(0)
         elif next_scene in "The Cell":
-            TheCell()
+            TheCell().launcher()
             exit(0)
         elif next_scene in "The Pipes":
-            ThePipes()
+            ThePipes().launcher()
             exit(0)
         elif next_scene in "The Jetroom":
-            TheJetroom()
+            TheJetroom().launcher()
             exit(0)
         elif next_scene in "Restart":
             Restart()
             exit(0)
         else:
-            print next_scene
-            print "Fallback to default value"
+            self.no_scene()
 
-    # We instantiate the class Utils and Engine
-    # in order to access to the items collection.)
+    def no_scene(self):
+        return self.next_scene
+
     utils_inst = Utils()
 
 
 class Intro(SceneManager):
     def __init__(self):
-        self.intro_text()
-        self.action()
+        pass
+
+    def launcher(self, test=False):
+        if test is not False:
+            return test
+        else:
+            self.intro_text()
+            self.action()
 
     @staticmethod
     def intro_text():
@@ -71,10 +76,13 @@ class Intro(SceneManager):
             Hit 'ENTER' to confirm your item:
             """
 
-    def action(self):
+    def action(self, test=False):
     # We iterate on items list
-        for i in self.utils_inst.items[:]:
-            print "\t 1 x", i
+        if test is True:
+            return "test_passed"
+        else:
+            for i in self.utils_inst.items[:]:
+                print "\t 1 x", i
 
         # We loop as long as the user doesn't have 3 items.
         while len(self.utils_inst.player_items) != 3:
@@ -109,8 +117,14 @@ class Intro(SceneManager):
 
 class TheBase(SceneManager):
     def __init__(self):
-        self.intro_text()
-        self.action()
+        pass
+
+    def launcher(self, test=False):
+        if test is not False:
+            return test
+        else:
+            self.intro_text()
+            self.action()
 
     @staticmethod
     def intro_text():
@@ -120,13 +134,15 @@ class TheBase(SceneManager):
         You then move towards the contacting unit, ready to contact the planet Earth, but the radio seems to be broken.
         """
 
-    def action(self):
+    def action(self, base_first_decision=0):
         base_first_action = "Are you trying to fix it or do you continue your exploration ?"
         base_second_action = "Do you continue to fix the radio or do you decide to get closer to the sound?"
-        base_first_decision = 0
         base_second_decision = 0
 
-        while base_first_decision not in ("fix", "continue"):
+        if base_first_decision == "test_value":
+            return base_first_decision
+
+        while base_first_decision not in ("fix", "continue", "test_value"):
             print base_first_action
             base_first_decision = raw_input("Fix or Continue? >").lower()
             print base_first_decision
@@ -135,7 +151,7 @@ class TheBase(SceneManager):
             if self.utils_inst.check_item("knife") is False:
                 print "Unfortunately, you don't have the knife with you, " \
                       "you need to move on, you continue to the alley..."
-                SceneManager("The Base")
+                SceneManager("The Alley")
             else:
                 print "You are trying to fix the radio, using your knife while all of a sudden,"
                 print "you hear some mysterious noise coming from the alley behind."
@@ -157,8 +173,14 @@ class TheBase(SceneManager):
 
 class TheAlley(SceneManager):
     def __init__(self):
-        self.intro_text()
-        self.action()
+        pass
+
+    def launcher(self, test=False):
+        if test is not False:
+            return test
+        else:
+            self.intro_text()
+            self.action()
 
     @staticmethod
     def intro_text():
@@ -169,9 +191,12 @@ class TheAlley(SceneManager):
         print "You can hear some aliens having some sort of a dialogue from the door next to you. "
         print "If you have taken the decoder, you can decode their dialogue."
 
-    def action(self):
+    def action(self, test=False):
         first_action = "Did you take the decoder with you?"
-        self.utils_inst.prompt(first_action)
+        if test is False:
+            self.utils_inst.prompt(first_action)
+        else:
+            return  test
 
         # Did the user took the decoder?
         if self.utils_inst.check_item("decoder"):
@@ -207,8 +232,14 @@ class TheAlley(SceneManager):
 
 class TheCell(SceneManager):
     def __init__(self):
-        self.intro_text()
-        self.action()
+        pass
+
+    def launcher(self, test=False):
+        if test is not False:
+            return test
+        else:
+            self.intro_text()
+            self.action()
 
     @staticmethod
     def intro_text():
@@ -217,7 +248,11 @@ class TheCell(SceneManager):
         print "You wake up and you find yourself, all locked up... but there is a trapdoor."
         print "If you have the screwdriver or knife with you can cut the ropes and escape"
 
-    def action(self):
+    def action(self, test=False):
+        if test is not False:
+            if self.utils_inst.check_item("test") is False:
+                return False
+
         first_action = "Do you think you have on of these items with you?"
         self.utils_inst.prompt(first_action)
         # Did the took either the screwdriver or the knife?
@@ -235,8 +270,14 @@ class TheCell(SceneManager):
 
 class ThePipes(SceneManager):
     def __init__(self):
-        self.text_intro()
-        self.action()
+        pass
+
+    def launcher(self, test=False):
+        if test is not False:
+            return test
+        else:
+            self.text_intro()
+            self.action()
 
     @staticmethod
     def text_intro():
@@ -244,9 +285,10 @@ class ThePipes(SceneManager):
 
         print "It's dark in there. If you have the flashlight, you can use it."""
 
-    def action(self):
-        first_action = "Do you think you have the pocket lamp with you?"
-        self.utils_inst.prompt(first_action)
+    def action(self, test=False):
+        if test is False:
+            first_action = "Do you think you have the pocket lamp with you?"
+            self.utils_inst.prompt(first_action)
 
         if self.utils_inst.check_item("flashlight"):
             print "You can see where you are heading to, and fortunately avoid a gap under you. "
@@ -256,15 +298,24 @@ class ThePipes(SceneManager):
             SceneManager("The Jetroom")
 
         else:
-            print "Unfortunately, you don't have the flashlight.."
-            print "You are walking and you fall into a gap you haven't seen...\n"
-            SceneManager("The Alley")
+            if test is not False:
+                return "test_passed"
+            else:
+                print "Unfortunately, you don't have the flashlight.."
+                print "You are walking and you fall into a gap you haven't seen...\n"
+                SceneManager("The Alley")
 
 
 class TheJetroom(SceneManager):
     def __init__(self):
-        self.intro_text()
-        self.action()
+        self.chances = 3
+
+    def launcher(self, test=False):
+        if test is not False:
+            return test
+        else:
+            self.intro_text()
+            self.action()
 
     @staticmethod
     def intro_text():
@@ -272,10 +323,13 @@ class TheJetroom(SceneManager):
 
         print "Inside that Jet room, find a small jet. You look around and try to power it on."
 
-    def action(self):
-        message = "But one thruster is missing. Do you have the portable one ?"
-        self.utils_inst.prompt(message)
-        if self.utils_inst.check_item("portable quantum thruster"):
+    def action(self, test=False):
+        if test is False:
+            message = "But one thruster is missing. Do you have the portable one ?"
+            self.utils_inst.prompt(message)
+
+        # We add the test condition to jump into the loop
+        if self.utils_inst.check_item("portable quantum thruster") or test is True:
             print "Hopefully you have it with you...You plug it into and power the engine on."
 
             if self.utils_inst.has_the_code:
@@ -296,15 +350,18 @@ class TheJetroom(SceneManager):
                 password = base64.b64decode("VGhpcyBpcyBub3QgdGhlIHBhc3N3b3JkISBHb29kIGNhdGNoIQ==")
                 base64.b64decode("sdsd")
 
-                print "You log into the main console, and it requires a passcode. The hint now says: %s " % passcode
-                print "Can you figure the passcode?\n"
-                chances = 3
-                while chances != 0:
-                    print "\n"
-                    print "%d F%%sdEwUii left" % chances
-                    print "-----------------"
-                    action = raw_input(passcode)
-                    chances -= 1
+                if test is False:
+                    print "You log into the main console, and it requires a passcode. The hint now says: %s " % passcode
+                    print "Can you figure the passcode?\n"
+
+                    while self.chances != 0:
+                        print "\n"
+                        print "%d F%%sdEwUii left" % self.chances
+                        print "-----------------"
+                        action = raw_input(passcode)
+                        self.chances -= 1
+                else:
+                    return test
 
             print "\n ...Unfortunately, the aliens are now coming to you are now pointing at you " \
                   "your gunfire they took you."
@@ -320,8 +377,14 @@ class TheJetroom(SceneManager):
 # Game over....
 class Restart(SceneManager):
     def __init__(self):
-        self.intro_text()
-        self.action()
+        pass
+
+    def launcher(self, test=False):
+        if test is False:
+            self.intro_text()
+            self.action()
+        else:
+            return "test_passed"
 
     @staticmethod
     def intro_text():
@@ -335,18 +398,21 @@ class Restart(SceneManager):
 
                                                        """
     @staticmethod
-    def action():
+    def action(test=False):
         message = "As Bastet, we believe you have 9 lives. Would you try again?"
 
-        print message
-        action = raw_input("Yes or No? >").lower()
-
-        while action not in ["yes", "no"]:
+        if test is False:
+            print message
             action = raw_input("Yes or No? >").lower()
-        if action == "yes":
-            # We restore the items list and reset the player list
-            Utils.items.extend(Utils.player_items)
-            Utils.player_items = []
-            SceneManager("Intro")
+
+            while action not in ["yes", "no"]:
+                action = raw_input("Yes or No? >").lower()
+            if action == "yes":
+                # We restore the items list and reset the player list
+                Utils.items.extend(Utils.player_items)
+                Utils.player_items = []
+                SceneManager.launcher("Intro")
+            else:
+                print "Adios amigos!"
         else:
-            print "Adios amigos!"
+            return message

@@ -12,8 +12,11 @@ class Utils(object):
     # We loop on a prompt as long as the
     # user doesn't type YES or NO
     @staticmethod
-    def prompt(message):
+    def prompt(message, test=False):
         first_decision = 0
+        if test is True:
+            return first_decision
+
         while first_decision != "no" and first_decision != "yes":
             print message
             first_decision = raw_input("Yes or No? >").lower()
