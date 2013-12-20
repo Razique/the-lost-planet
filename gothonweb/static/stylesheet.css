@@ -1,0 +1,43 @@
+a {
+    color: gray;
+	font-style: normal;
+    text-decoration: none;
+}
+
+a:hover {
+    color: black;
+	font-style: normal;
+    text-decoration: none;
+}
+
+
+h1 {
+    color: #fcfcfc;
+}
+
+h1:hover{
+    color: #b0b0b0;
+}
+
+body {
+    background: rgb(150,147,144); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(150,147,144,1) 0%, rgba(80,81,69,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(150,147,144,1)), color-stop(100%,rgba(80,81,69,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(150,147,144,1) 0%,rgba(80,81,69,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(150,147,144,1) 0%,rgba(80,81,69,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(150,147,144,1) 0%,rgba(80,81,69,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(150,147,144,1) 0%,rgba(80,81,69,1) 100%); /* W3C */
+
+	text-align: center;
+	font-size: 35px;
+	font-family: sans-serif;
+	color: #1c3363;
+}
+
+#form {
+    width: 100%;
+}
+
+input[type='submit'] {
+    font-size: 55px;
+}
