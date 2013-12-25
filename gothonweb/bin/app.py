@@ -1,40 +1,47 @@
 import web
+from gothonweb import map
+
+web.config.debug = False
 
 urls = (
-    '/hello', 'Index'
+    '/game', 'GameEngine',
+    '/', 'Index',
 )
-
 app = web.application(urls, globals())
-render = web.template.render('templates/', base="layout")
+
+if web.config.get('__session') is None:
+    store = web.session.DiskStore('sessions')
+    session = web.session.Session(app, store, initializer={'room': None})
+    web.config.__session = session
+else:
+    session = web.config.__session
+
+render = web.template.render('templates/', base='layout')
 
 
-class Index:
-    def __init__(self):
-        pass
-
+class Index(object):
     @staticmethod
     def GET():
-        return render.hello_form()
+        session.room = map.START
+        web.seeother("/game")
+
+
+class GameEngine(object):
+    @staticmethod
+    def GET():
+        if session.room:
+            return render.show_room(room=session.room)
+        else:
+            return render.you_died()
 
     @staticmethod
     def POST():
-        form = web.input(name=None, greet=None)
-        greetings = "%s, %s" % (form.name, form.greet)
-        x = web.input(myfile={})
-        filedir = 'upload'
+        form = web.input(action=None)
 
-        if 'myfile' in x:
-            try:
-                filepath = x.myfile.filename.replace('\\', '/')
-                filename = filepath.split('/')[-1]  # splits the and chooses the last part (the filename with extension)
-                fout = open(filedir + '/' + filename, 'w')  # creates the file where the uploaded file should be stored
-                fout.write(x.myfile.file.read())  # writes the uploaded file to the newly created file.
-                fout.close()  # closes the file, upload complete.
-                return render.index(greetings)
-            except IOError:
-                return render.index(greetings)
-        else:
-            raise web.seeother('/hello')
+        if session.room and form.action:
+            session.room = session.room.go(form.action)
+
+        web.seeother("/game")
 
 
 if __name__ == "__main__":

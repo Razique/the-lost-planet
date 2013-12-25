@@ -1,6 +1,6 @@
 from nose.tools import *
-from bin.app import app
-from tests.tools import assert_response
+from gothonweb.bin.app import app
+from gothonweb.tests.tools import assert_response
 
 
 def test_index():
