@@ -10,9 +10,20 @@ a:hover {
     text-decoration: none;
 }
 
+#picture {
+    margin-left: auto;
+    margin-right: auto;
+}
 
 h1 {
     color: #fcfcfc;
+}
+
+#room-description{
+    width: 600px;
+    height: auto;
+    margin: auto;
+    text-align: justify;
 }
 
 h1:hover{

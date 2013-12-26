@@ -1,14 +1,21 @@
 $def with (room)
  <h1> $room.name </h1>
 
-$room.description
+<div id="picture">
+    <img src="/static/monster_corridor.jpg">
+</div>
 
-$if room.name == "death":
-        <p><a href="/">Play again?</a></p>
-$else:
-        <p>
-        <form action="/game" method="POST">
-           - <input type="text" name="action"><input type="submit">
-        </form>
+<div id="room-description">
+    $room.description
 
-        </p>
+    $if room.name == "death":
+            <p><a href="/">Play again?</a></p>
+    $else:
+            <p>
+            <form action="/game" method="POST">
+               What do you do? <input type="text" name="action"><input type="submit">
+            </form>
+
+            </p>
+</div>
+        
