@@ -1,6 +1,3 @@
-import random
-
-
 class Room(object):
     def __init__(self, name, description):
         self.name = name
@@ -13,18 +10,6 @@ class Room(object):
     def add_paths(self, paths):
         self.paths.update(paths)
 
-
-def generic_death():
-    deaths = [
-        "You Died",
-        "Unfortunately, you didn't make it, sorry bud",
-        "Oh No ! Bad choice. You died!",
-        "You died.  You kinda suck at this.",
-        "Your mom would be proud...if she were smarter.",
-        "Such a luser.",
-        "I have a small puppy that's better at this."
-    ]
-    return Room("Death", random.choice(deaths))
 
 central_corridor = Room("Central Corridor",
                         """
@@ -120,22 +105,23 @@ escape_pod.add_paths({
     '*': the_end_loser
 })
 
+generic_death = Room("Death", "You died.")
 
 the_bridge.add_paths({
-    'throw the bomb': generic_death(),
-    'slowly place the bomb': escape_pod,
+    'throw the bomb': generic_death,
+    'slowly place the bomb': escape_pod
 })
 
 laser_weapon_armory.add_paths({
     '0132': the_bridge,
-    '*': generic_death(),
+    '*': generic_death
 })
 
 central_corridor.add_paths({
 
-    'shoot': generic_death(),
-    'dodge': generic_death(),
-    'tell a joke': laser_weapon_armory,
+    'shoot': generic_death,
+    'dodge': generic_death,
+    'tell a joke': laser_weapon_armory
 })
 
 START = central_corridor

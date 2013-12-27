@@ -9,18 +9,20 @@ class ListActions(object):
     def actions(items):
         lexion = {
             'Central Corridor': ['shoot', 'dodge', 'tell a joke'],
-            'Laser Weapon Armory': ['0132', '*'],
-            'The Bridge': ['throw the bomb','slowly place the bomb'],
-            'Escape Pod': ['2', '*'],
+            'Laser Weapon Armory': ['a', 'b'],
+            'The Bridge': ['a', 'b'],
+            'Escape Pod': ['a', 'b'],
             'The End': ['a', 'b'],
-            'Default': ['']
 
         }
         if items not in lexion:
-            return lexion['Default']
+            return lexion['Central Corridor']
         else:
             return lexion[items]
 
 if __name__ == '__main__':
     launcher = ListActions()
     launcher.actions('Central Corridor')
+
+
+

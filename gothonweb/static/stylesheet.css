@@ -1,5 +1,5 @@
 #picture {
-    background: #3a3a3a;
+    background: #2f2f2f;
     margin-bottom: 15px;
 
 }
@@ -18,17 +18,10 @@
 	font-size: 15px;
 	color: #e3e3e3;
 	text-align: left;
+    background: #2f2f2f;
     padding: 10px;
 }
 
-#container:hover {
-    background: #474747;
-}
-
-#container{
-	width: 100%;
-	background: #2f2f2f;
-}
 #form {
     width: 100%;
 }
