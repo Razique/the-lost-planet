@@ -45,7 +45,9 @@ class GameEngine(object):
                 session.room = session.room.go(user_data.action)
                 web.seeother("/game")
             else:
-                return render.show_room(room=session.room, picture=random_pic, actions=actions.actions(session.room.name))
+                # TODO: Implement code input for the armory
+                return render.show_room(room=session.room, picture=random_pic,
+                                        actions=actions.actions(session.room.name))
         else:
             return render.you_died()
 
