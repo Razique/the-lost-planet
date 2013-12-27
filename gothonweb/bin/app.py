@@ -34,23 +34,20 @@ class Index(object):
 class GameEngine(object):
     @staticmethod
     def GET():
+        user_data = web.input(action=None)
         if session.room:
+            # We generate an images random picker
             pic = glob.glob("static/*.jpg")
             random_pic = random.choice(pic)
             actions = game_lexicon.ListActions()
-
-            return render.show_room(room=session.room, picture=random_pic, actions=actions.actions(session.room.name))
+            # If the user has made a choice
+            if user_data.action:
+                session.room = session.room.go(user_data.action)
+                web.seeother("/game")
+            else:
+                return render.show_room(room=session.room, picture=random_pic, actions=actions.actions(session.room.name))
         else:
             return render.you_died()
-
-    @staticmethod
-    def POST():
-        form = web.input(action=None)
-
-        if session.room and form.action:
-            session.room = session.room.go(form.action)
-
-        web.seeother("/game")
 
 
 if __name__ == "__main__":
