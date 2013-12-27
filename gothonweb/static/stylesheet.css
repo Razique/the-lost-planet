@@ -1,7 +1,7 @@
 #picture {
-    margin-left: auto;
-    margin-right: auto;
-	padding: 10px;
+    background: #2f2f2f;
+    margin-bottom: 15px;
+
 }
 
 #room-description{
@@ -9,6 +9,17 @@
     height: auto;
     margin: auto;
     text-align: justify;
+}
+
+#room-action {
+    width: 600px;
+    height: auto;
+    margin: auto;
+	font-size: 15px;
+	color: #e3e3e3;
+	text-align: left;
+    background: #2f2f2f;
+    padding: 10px;
 }
 
 #form {
@@ -22,7 +33,7 @@ a {
 }
 
 a:hover {
-    color: black;
+    color: #2d769e;
 	font-style: normal;
     text-decoration: none;
 }
@@ -32,7 +43,8 @@ h1:hover{
 }
 
 body {
-    background: rgb(43, 43, 43);
+    margin: 0px;
+    background: #2B2B2B;
 	text-align: center;
 	font-size: 15px;
 	font-family: "Courier New", courier, monospace;
@@ -48,8 +60,3 @@ input {
 	border-radius: 5px;
 }
 
-blockquote {
-	font-size: 20px;
-	color: #e3e3e3;
-	text-align: center;
-}

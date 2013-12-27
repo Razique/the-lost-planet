@@ -4,6 +4,7 @@ import web
 import glob
 import random
 from gothonweb import map
+from gothonweb import game_lexicon
 
 web.config.debug = False
 
@@ -36,7 +37,9 @@ class GameEngine(object):
         if session.room:
             pic = glob.glob("static/*.jpg")
             random_pic = random.choice(pic)
-            return render.show_room(room=session.room, picture=random_pic)
+            actions = game_lexicon.ListActions()
+
+            return render.show_room(room=session.room, picture=random_pic, actions=actions.actions(session.room.name))
         else:
             return render.you_died()
 
