@@ -7,22 +7,25 @@ $def with (room, picture, actions)
 
 <div id="room-description">
     $room.description
+</div>
 
-    $if room.name == "death":
-            <p><a href="/">Play again?</a></p>
+<div id="container">
+    $if room.name == "Death" or room.name =="The End":
+        <p><a href="/">Play again?</a></p>
     $else:
-            <p>
+        <div id="room-action">
+        What do you do?
+        <p/>
+        <ul>
+        $for i in actions:
+            <li>
+                <a href="/game?action=$i">$i.title()</a>
+            </li>
+         </ul>
+        </div>
 </div>
 
-<div id="room-action">
-What do you do?
-<p/>
-<ul>
-$for i in actions:
-    <li>
-        <a href="/game?action=$i">$i.title()</a>
-    </li>
- </ul>
-</div>
+
+
 
         
