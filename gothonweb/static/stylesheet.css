@@ -1,3 +1,20 @@
+#picture {
+    margin-left: auto;
+    margin-right: auto;
+	padding: 10px;
+}
+
+#room-description{
+    width: 600px;
+    height: auto;
+    margin: auto;
+    text-align: justify;
+}
+
+#form {
+    width: 100%;
+}
+
 a {
     color: #44bdfb;
 	font-style: normal;
@@ -10,38 +27,29 @@ a:hover {
     text-decoration: none;
 }
 
-#picture {
-    margin-left: auto;
-    margin-right: auto;
+h1:hover{
+    color: #b0b0b0;
+}
+
+body {
+    background: rgb(43, 43, 43);
+	text-align: center;
+	font-size: 15px;
+	font-family: "Courier New", courier, monospace;
+	color: #b1b0a5;
 }
 
 h1 {
     color: #fcfcfc;
 }
 
-#room-description{
-    width: 600px;
-    height: auto;
-    margin: auto;
-    text-align: justify;
+input {
+	padding: 5px;
+	border-radius: 5px;
 }
 
-h1:hover{
-    color: #b0b0b0;
-}
-
-body {
-    background: rgb(90, 118, 150); /* Old browsers */
+blockquote {
+	font-size: 20px;
+	color: #e3e3e3;
 	text-align: center;
-	font-size: 15px;
-	font-family: Verdana, Arial, helvetica, sans-serif;
-	color: #fffef0;
-}
-
-#form {
-    width: 100%;
-}
-
-input[type='submit'] {
-    font-size: 55px;
 }

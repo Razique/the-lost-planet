@@ -1,8 +1,8 @@
-$def with (room)
- <h1> $room.name </h1>
+$def with (room, picture)
+<h1 xmlns="http://www.w3.org/1999/html"> $room.name </h1>
 
 <div id="picture">
-    <img src="/static/monster_corridor.jpg">
+    <img src=$picture/>
 </div>
 
 <div id="room-description">
@@ -12,10 +12,10 @@ $def with (room)
             <p><a href="/">Play again?</a></p>
     $else:
             <p>
+    <blockquote>
             <form action="/game" method="POST">
-               What do you do? <input type="text" name="action"><input type="submit">
+               What do you do? <input type="text" name="action"><input value="Go" type="submit">
             </form>
-
-            </p>
+    </blockquote>
 </div>
         

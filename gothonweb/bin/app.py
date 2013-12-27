@@ -1,6 +1,8 @@
 import sys
 sys.path.append('../')
 import web
+import glob
+import random
 from gothonweb import map
 
 web.config.debug = False
@@ -32,7 +34,9 @@ class GameEngine(object):
     @staticmethod
     def GET():
         if session.room:
-            return render.show_room(room=session.room)
+            pic = glob.glob("static/*.jpg")
+            random_pic = random.choice(pic)
+            return render.show_room(room=session.room, picture=random_pic)
         else:
             return render.you_died()
 
