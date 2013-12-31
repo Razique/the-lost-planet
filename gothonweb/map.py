@@ -55,7 +55,7 @@ laser_weapon_armory = Room("Laser Weapon Armory",
                 You stand up and run to the far side of the room and find the
                 neutron bomb in its container.  There's a keypad lock on the box
                 and you need the code to get the bomb out.  If you get the code
-                wrong 10 times then the lock closes forever and you can't
+                wrong 5 times then the lock closes forever and you can't
                 get the bomb.  The code is 3 digits.
                 """)
 
@@ -132,7 +132,6 @@ laser_weapon_armory.add_paths({
 })
 
 central_corridor.add_paths({
-
     'shoot': generic_death(),
     'dodge': generic_death(),
     'tell a joke': laser_weapon_armory,

@@ -1,4 +1,4 @@
-$def with (room, picture, actions)
+$def with (room, picture, actions, attempts)
 <h1 xmlns="http://www.w3.org/1999/html"> $room.name </h1>
 
 <div id="picture">
@@ -12,6 +12,12 @@ $def with (room, picture, actions)
 <div id="container">
     $if room.name == "Death" or room.name =="The End":
         <p><a href="/">Play again?</a></p>
+    $elif room.name == "Laser Weapon Armory":
+        $attempts Attempts Left:
+        <form method="post" action="/game">
+            <input name="armory_code" />
+            <input type="submit" value="GO!" />
+        </form>
     $else:
         <div id="room-action">
         What do you do?
