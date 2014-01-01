@@ -8,6 +8,7 @@ $def with (room, picture, actions, attempts)
 <div id="room-description">
     $room.description
 </div>
+<br />
 
 <div id="container">
     $if room.name == "Death" or room.name =="The End":
@@ -19,16 +20,12 @@ $def with (room, picture, actions, attempts)
             <input type="submit" value="GO!" />
         </form>
     $else:
-        <div id="room-action">
-        What do you do?
+        <b>What do you do?</b>
+        <form method="post" action="/game">
+            <input name="action" />
+            <input type="submit" value="GO!">
+        </form>
         <p/>
-        <ul>
-        $for i in actions:
-            <li>
-                <a href="/game?action=$i">$i.title()</a>
-            </li>
-         </ul>
-        </div>
 </div>
 
 

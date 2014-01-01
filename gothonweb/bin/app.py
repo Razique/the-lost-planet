@@ -36,6 +36,7 @@ class GameEngine(object):
         pic = glob.glob("static/*.jpg")
         random_pic = random.choice(pic)
         actions = game_lexicon.ListActions()
+        self.lexicon = game_lexicon.AssertLexicon()
         self.view = render.show_room(room=session.room, picture=random_pic,
                                      actions=actions.actions(session.room.name), attempts=session.attempts)
 
@@ -52,14 +53,21 @@ class GameEngine(object):
 
     def POST(self):
         code = web.input(armory_code=None)
-        if code.armory_code:
+        process = web.input(action=None)
+        #TODO Fix the bridge scene (currently accepting any output)
+        if process.action:
+            if self.lexicon.lexicon(process.action, session.room.name, test=False) is not False:
+                session.room = session.room.go(self.lexicon.lexicon(process.action, session.room.name, test=False))
+                web.seeother("/game")
+            else:
+                return render.you_died()
+        elif code.armory_code:
             if session.attempts != 1:
-                if code.armory_code != "0132":
+                if self.lexicon.lexicon(code.armory_code, session.room.name, test=False) is False:
                     session.attempts -= 1
-                    web.seeother("/game")
                 else:
                     session.room = session.room.go(code.armory_code)
-                    web.seeother("/game")
+                web.seeother("/game")
             else:
                 return render.you_died()
         else:

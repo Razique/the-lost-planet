@@ -56,7 +56,7 @@ laser_weapon_armory = Room("Laser Weapon Armory",
                 neutron bomb in its container.  There's a keypad lock on the box
                 and you need the code to get the bomb out.  If you get the code
                 wrong 5 times then the lock closes forever and you can't
-                get the bomb.  The code is 3 digits.
+                get the bomb.  The code is 4 digits.
                 """)
 
 
@@ -115,26 +115,26 @@ the_end_loser = Room("The End",
                 into jam jelly.
                 """)
 
-escape_pod.add_paths({
-    '2': the_end_winner,
-    '*': the_end_loser
+central_corridor.add_paths({
+    'shoot': generic_death(),
+    'dodge': generic_death(),
+    'joke': laser_weapon_armory,
 })
 
+laser_weapon_armory.add_paths({
+    '*': generic_death(),
+    '0132': the_bridge,
+})
 
 the_bridge.add_paths({
+    '*': generic_death(),
     'throw the bomb': generic_death(),
     'slowly place the bomb': escape_pod,
 })
 
-laser_weapon_armory.add_paths({
-    '0132': the_bridge,
-    '*': generic_death(),
-})
-
-central_corridor.add_paths({
-    'shoot': generic_death(),
-    'dodge': generic_death(),
-    'tell a joke': laser_weapon_armory,
+escape_pod.add_paths({
+    '*': the_end_loser,
+    '2': the_end_winner
 })
 
 START = central_corridor

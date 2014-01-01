@@ -6,3 +6,13 @@
 
 
 1.`The Lost Plantet`: A text-based interactive game  
+2. `Gothonweb`: A web-based game, following [LPTHW](http://learnpythonthehardway.org/)
+
+### How to run the game? ###
+1. Run the following command (as root):  
+`pip install lpthw.web nose`
+
+2. `cd gothonweb`  
+3. `python bin/app.py`  
+4. Open your browser, and go to:  
+htt://localhost:8080
