@@ -9,7 +9,8 @@
 2. `Gothonweb`: A web-based game, following [LPTHW](http://learnpythonthehardway.org/)
 
 ### How to run the game? ###
-![Armory](https://raw.github.com/Razique/Python-Stuff/master/gothonweb/static/armory.jpg)
+![Armory](https://raw.github.com/Razique/Python-Stuff/master/gothonweb/static/armory.jpg)  
+
 1. Run the following command (as root):  
 `pip install lpthw.web nose`
 

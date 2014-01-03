@@ -1,4 +1,4 @@
-$def with (room, picture, actions, attempts)
+$def with (room, picture, attempts, user)
 <h1 xmlns="http://www.w3.org/1999/html"> $room.name </h1>
 
 <div id="picture">
@@ -20,7 +20,7 @@ $def with (room, picture, actions, attempts)
             <input type="submit" value="GO!" />
         </form>
     $else:
-        <b>What do you do?</b>
+        <b>What do you do $user?</b>
         <form method="post" action="/game">
             <input name="action" />
             <input type="submit" value="GO!">

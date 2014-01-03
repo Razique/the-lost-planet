@@ -15,7 +15,7 @@ app = web.application(urls, globals())
 
 if web.config.get('__session') is None:
     store = web.session.DiskStore('sessions')
-    session = web.session.Session(app, store, initializer={'room': None, 'attempts': None})
+    session = web.session.Session(app, store, initializer={'room': None, 'attempts': None, 'user': None})
     web.config.__session = session
 else:
     session = web.config.__session
@@ -28,17 +28,19 @@ class Index(object):
     def GET():
         session.room = map.START
         session.attempts = 5
-        web.seeother("/game")
+        if session.user:
+            web.seeother("/game")
+        else:
+            return render.intro()
 
 
 class GameEngine(object):
     def __init__(self):
         pic = glob.glob("static/*.jpg")
         random_pic = random.choice(pic)
-        actions = game_lexicon.ListActions()
         self.lexicon = game_lexicon.AssertLexicon()
         self.view = render.show_room(room=session.room, picture=random_pic,
-                                     actions=actions.actions(session.room.name), attempts=session.attempts)
+                                     attempts=session.attempts, user=session.user)
 
     def GET(self):
         if session.room:
@@ -52,9 +54,14 @@ class GameEngine(object):
             return render.you_died()
 
     def POST(self):
+        if session.user is None:
+            # Username init
+            user = web.input(username=None)
+            session.user = user.username
+            web.seeother("/game")
+
         code = web.input(armory_code=None)
         process = web.input(action=None)
-        #TODO Fix the bridge scene (currently accepting any output)
         if process.action:
             if self.lexicon.lexicon(process.action, session.room.name, test=False) is not False:
                 session.room = session.room.go(self.lexicon.lexicon(process.action, session.room.name, test=False))
@@ -73,5 +80,7 @@ class GameEngine(object):
         else:
             return self.view
 
+#TODO: Map selector
+#TODO: Help System
 if __name__ == "__main__":
     app.run()

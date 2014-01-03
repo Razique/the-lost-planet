@@ -45,6 +45,7 @@ a:hover {
 
 h1:hover{
     color: #b0b0b0;
+	text-shadow: 1px 2px 5px #E03232;
 }
 
 body {
@@ -59,6 +60,7 @@ body {
 h1 {
 	font-family: fantasy    ;
     color: #fcfcfc;
+	text-shadow: 1px 2px 5px #0AA2DD;
 }
 
 input {

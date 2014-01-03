@@ -128,13 +128,12 @@ laser_weapon_armory.add_paths({
 
 the_bridge.add_paths({
     '*': generic_death(),
-    'throw the bomb': generic_death(),
     'slowly place the bomb': escape_pod,
 })
 
 escape_pod.add_paths({
     '*': the_end_loser,
-    '2': the_end_winner
+    '2': the_end_winner,
 })
 
 START = central_corridor
