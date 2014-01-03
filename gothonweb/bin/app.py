@@ -4,11 +4,13 @@ import web
 import glob
 import random
 from gothonweb import map, game_lexicon
+from sanitize import sanitize
 
 web.config.debug = False
 
 urls = (
     '/game', 'GameEngine',
+    '/rooms', 'Rooms',
     '/', 'Index',
 )
 app = web.application(urls, globals())
@@ -29,9 +31,17 @@ class Index(object):
         session.room = map.START
         session.attempts = 5
         if session.user:
-            web.seeother("/game")
+            web.seeother("/rooms")
         else:
             return render.intro()
+
+
+class Rooms(object):
+    def __init__(self):
+        self.rooms = game_lexicon.AssertLexicon()
+
+    def GET(self):
+        return render.list_rooms(self.rooms.return_rooms(), username=session.user)
 
 
 class GameEngine(object):
@@ -63,14 +73,14 @@ class GameEngine(object):
         code = web.input(armory_code=None)
         process = web.input(action=None)
         if process.action:
-            if self.lexicon.lexicon(process.action, session.room.name, test=False) is not False:
-                session.room = session.room.go(self.lexicon.lexicon(process.action, session.room.name, test=False))
+            if self.lexicon.parse_lexicon(process.action, session.room.name, test=False) is not False:
+                session.room = session.room.go(self.lexicon.parse_lexicon(process.action, session.room.name, test=False))
                 web.seeother("/game")
             else:
                 return render.you_died()
         elif code.armory_code:
             if session.attempts != 1:
-                if self.lexicon.lexicon(code.armory_code, session.room.name, test=False) is False:
+                if self.lexicon.parse_lexicon(code.armory_code, session.room.name, test=False) is False:
                     session.attempts -= 1
                 else:
                     session.room = session.room.go(code.armory_code)
@@ -80,7 +90,5 @@ class GameEngine(object):
         else:
             return self.view
 
-#TODO: Map selector
-#TODO: Help System
 if __name__ == "__main__":
     app.run()

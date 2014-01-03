@@ -1,0 +1,13 @@
+$def with (rooms, username)
+<h1 xmlns="http://www.w3.org/1999/html">Pick a room $username</h1>
+
+<div id="picture">
+    <img src=""/>
+</div>
+
+
+<div id="container">
+    $for i in rooms:
+         <a href="/game">$i</a><br />
+</div>
+        
