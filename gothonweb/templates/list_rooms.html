@@ -5,9 +5,11 @@ $def with (rooms, username)
     <img src=""/>
 </div>
 
-
 <div id="container">
+    <ol>
     $for i in rooms:
-         <a href="/game">$i</a><br />
+         <li><a href="/game?room=$i">$i</a></li>
+
+    </ol>
 </div>
         

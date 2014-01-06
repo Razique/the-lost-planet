@@ -1,10 +1,57 @@
+#change_room, #change_user{
+	background: url("room-icon.png") no-repeat;
+	width: 100px;
+	height: 25px;
+	padding-left: 40px;
+	padding-top: 15px;
+	float: left;
+}
+
+#change_user {
+	background: url("user-icon.png") no-repeat;
+}
+
+#options {
+	width: 280px;
+	height: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 50px;
+}
+
+#help {
+	background: url("help-icon.png") no-repeat;
+	width: 40px;
+	height: 40px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#help div {
+	z-index:10;
+	visibility:hidden;
+	width: 500px;
+	height: auto;
+	margin-left: -240px;
+	margin-top: -200px;
+	background: #161616;
+	padding: 10px;
+	border-radius: 10px;
+	position: absolute;
+	box-shadow: 0px 5px 10px #36547A;
+}
+
+#help:hover div {
+	visibility:visible;
+}
+
 #picture {
     background: #3a3a3a;
     margin-bottom: 15px;
 
 }
 
-#room-description{
+#room-description {
     width: 600px;
     height: auto;
     margin: auto;
@@ -22,11 +69,14 @@
 }
 
 
-#container{
+#container {
 	width: 100%;
 	background: #2f2f2f;
-	padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
 }
+
 #form {
     width: 100%;
 }
@@ -63,6 +113,13 @@ h1 {
 	text-shadow: 1px 2px 5px #0AA2DD;
 }
 
+ol {
+	text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+}
+
 input {
 	padding: 5px;
 	border-radius: 5px;
@@ -82,4 +139,3 @@ input[type="submit"]:hover {
 	color: white
 
 }
-

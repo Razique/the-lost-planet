@@ -13,19 +13,40 @@ $def with (room, picture, attempts, user)
 <div id="container">
     $if room.name == "Death" or room.name =="The End":
         <p><a href="/">Play again?</a></p>
+
+    $elif room.name == "Final Scene":
+            <p><a href="/">Play again?</a></p>
+
     $elif room.name == "Laser Weapon Armory":
         $attempts Attempts Left:
         <form method="post" action="/game">
             <input name="armory_code" />
             <input type="submit" value="GO!" />
         </form>
+
     $else:
         <b>What do you do $user?</b>
         <form method="post" action="/game">
             <input name="action" />
             <input type="submit" value="GO!">
         </form>
-        <p/>
-</div>
 
-<a href="rooms">Change Room</a>
+    <div id="help">
+        <div>
+            <p alig="center"><b>Help Me!</b></p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+            Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.
+            Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa.
+        </div>
+    </div>
+</div>
+<br/>
+<div id="options">
+    <div id="change_room">
+        <a href="rooms">Change Room</a>
+    </div>
+    <div id="change_user">
+        <a href="/?change=1">Change Name</a>
+    </div>
+</div>

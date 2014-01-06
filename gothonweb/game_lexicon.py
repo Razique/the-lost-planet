@@ -1,14 +1,14 @@
 # -*- coding : utf-8 -*-
+import map
 
 
 class AssertLexicon(object):
     def __init__(self):
         self.lexicon = {
-            'Central Corridor': ('shoot', 'dodge', 'joke'),
-            'Laser Weapon Armory': ('*', '0132'),
-            'The Bridge': ('*', 'slowly place the bomb'),
-            'Escape Pod': ('*', '2'),
-            'The End': ('a', 'b'),
+            map.central_corridor.name: ('shoot', 'dodge', 'joke'),
+            map.laser_weapon_armory.name: ('*', '0132'),
+            map.the_bridge.name: ('*', 'slowly place the bomb'),
+            map.escape_pod.name: ('*', '2'),
         }
 
     def parse_lexicon(self, user_sentence, room, test=False):
@@ -27,6 +27,13 @@ class AssertLexicon(object):
         for i in sorted(self.lexicon.iterkeys()):
             rooms.append(i)
         return rooms
+
+    def return_room_name(self, room):
+        room_name = self.lexicon
+        for i in self.lexicon[room]:
+            print i[1]
+        #return room_name
+        #return room
 
 if __name__ == '__main__':
     launcher = AssertLexicon()

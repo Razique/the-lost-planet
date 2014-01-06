@@ -96,7 +96,7 @@ escape_pod = Room("Escape Pod",
                 """)
 
 
-the_end_winner = Room("The End",
+the_end_winner = Room("Final Scene",
                       """
                 You jump into pod 2 and hit the eject button.
                 The pod easily slides out into space heading to

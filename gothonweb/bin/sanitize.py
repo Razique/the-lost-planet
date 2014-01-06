@@ -2,4 +2,5 @@
 
 
 def sanitize(cleanme):
-    return "".join(x for x in cleanme if x.isalnum())
+    final_string = cleanme[:15]
+    return "".join(x for x in final_string if x.isalnum())
