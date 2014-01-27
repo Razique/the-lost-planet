@@ -2,9 +2,10 @@ import random
 
 
 class Room(object):
-    def __init__(self, name, description):
+    def __init__(self, name, description, helpme):
         self.name = name
         self.description = description
+        self.helpme = helpme
         self.paths = {}
 
     def go(self, direction):
@@ -24,7 +25,7 @@ def generic_death():
         "Such a luser.",
         "I have a small puppy that's better at this."
     ]
-    return Room("Death", random.choice(deaths))
+    return Room("Death", random.choice(deaths), None)
 
 central_corridor = Room("Central Corridor",
                         """
@@ -38,6 +39,11 @@ central_corridor = Room("Central Corridor",
                 a Gothon jumps out, red scaly skin, dark grimy teeth, and evil clown costume
                 flowing around his hate filled body.  He's blocking the door to the
                 Armory and about to pull a weapon to blast you...
+                """,
+                        """
+                In this place you have several options - you can try to shoot the Gothon with your gun,
+                you can also try to dodge him, of finall, you can even try to tell him a joke if you feel up to.
+                So, what will be your call?...
                 """)
 
 
@@ -57,8 +63,12 @@ laser_weapon_armory = Room("Laser Weapon Armory",
                 and you need the code to get the bomb out.  If you get the code
                 wrong 5 times then the lock closes forever and you can't
                 get the bomb.  The code is 4 digits.
+                """,
+                           """
+                   In this room, you need to figure out the right combination, it's a 4 digits code,
+                   but try to find the right now, otherwise the lock will close forever,
+                   and you won't be able to get the bomb. Do your best!
                 """)
-
 
 the_bridge = Room("The Bridge",
                   """
@@ -72,8 +82,13 @@ the_bridge = Room("The Bridge",
                 clown costume than the last.  They haven't pulled their
                 weapons out yet, as they see the active bomb under your
                 arm and don't want to set it off.
+                """,
+                  """
+                You are now on the bridge! you have some options here,
+                especially given the fact you are 5 Gothons ou you. You can try to slowly place the bomb,
+                use the secret weapon you might have or try to run away.
+                What's your call?
                 """)
-
 
 escape_pod = Room("Escape Pod",
                   """
@@ -93,8 +108,12 @@ escape_pod = Room("Escape Pod",
                 now need to pick one to take.  Some of them could be damaged
                 but you don't have time to look.  There's 5 pods, which one
                 do you take?
+                """,
+                  """
+                Congrats! You made it to the Escape Pod! You see 5 pods around,
+                but only one is not damaged, you don't have the time to look,
+                try to focus and find the right one, pick fast, Gothons are all around you!
                 """)
-
 
 the_end_winner = Room("Final Scene",
                       """
@@ -104,8 +123,11 @@ the_end_winner = Room("Final Scene",
                 back and see your ship implode then explode like a
                 bright star, taking out the Gothon ship at the same
                 time.  You won!
+                """,
+                      """
+                Congratulations! You made it to the end and you survived.
+                This was not an easy one, but you made great!
                 """)
-
 
 the_end_loser = Room("The End",
                      """
@@ -113,6 +135,11 @@ the_end_loser = Room("The End",
                 The pod escapes out into the void of space, then
                 implodes as the hull ruptures, crushing your body
                 into jam jelly.
+                """,
+                     """
+                Unfortunately, this was not your day. For sure,
+                all these Gothons did not made it easy for you,
+                you'll beat them next time!
                 """)
 
 central_corridor.add_paths({
