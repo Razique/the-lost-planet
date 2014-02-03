@@ -82,7 +82,6 @@ class GameEngine(object):
         if session.user is None:
             web.seeother("/")
 
-        #TODO Fixme room picker
         rooms = web.input(room=None)
         get_room = rooms.room
         if get_room:
@@ -92,6 +91,8 @@ class GameEngine(object):
                 session.room = map.laser_weapon_armory
             elif get_room == "The Bridge":
                 session.room = map.the_bridge
+            elif get_room == "Pod Room":
+                session.room = map.pod_room
             elif get_room == "Escape Pod":
                 session.room = map.escape_pod
             else:

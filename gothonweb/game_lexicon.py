@@ -8,6 +8,7 @@ class AssertLexicon(object):
             map.central_corridor.name: ('shoot', 'dodge', 'joke'),
             map.laser_weapon_armory.name: ('*', '0132'),
             map.the_bridge.name: ('*', 'slowly place the bomb'),
+            map.pod_room.name: ('*', '3'),
             map.escape_pod.name: ('*', '2'),
         }
 

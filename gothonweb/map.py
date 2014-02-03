@@ -90,6 +90,21 @@ the_bridge = Room("The Bridge",
                 What's your call?
                 """)
 
+pod_room = Room("Pod Room",
+                """
+                You arrived into the pod room, and you look for exit pods around,
+                the Gothons are trying to catch you, so you better be quick.
+                You look for the main entries but they are far away from you.
+                You start to run, while the Gothons are coming to get you. You
+                see 5 doors around you, but they all look similar. Which one do
+                you think you will take?
+                """,
+                """
+                You need to pick one door, from the first to the fifth, only one
+                will lead you to the Escape Pod room, so choose wisely or face the
+                Gothons wrath?
+                """)
+
 escape_pod = Room("Escape Pod",
                   """
                 You point your blaster at the bomb under your arm
@@ -155,7 +170,12 @@ laser_weapon_armory.add_paths({
 
 the_bridge.add_paths({
     '*': generic_death(),
-    'slowly place the bomb': escape_pod,
+    'slowly place the bomb': pod_room,
+})
+
+pod_room.add_paths({
+    '3': escape_pod,
+    '*': generic_death(),
 })
 
 escape_pod.add_paths({
