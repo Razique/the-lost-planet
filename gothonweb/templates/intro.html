@@ -1,20 +1,20 @@
-
 <div id="picture">
     <img src=static/armory.jpg>
 </div>
 
 <div id="container_intro">
-        <form method="post" action="/rooms">
+    <form method="post" action="/rooms">
+        <fieldset>
+            <legend>Login</legend>
             <b>Pick a username:</b>
-            <input name="username" />
+            <input name="username"type="text" id="user-input" value="Username"
+                   onfocus="if(this.value == 'Username') {this.value=''}"
+                   onblur="if(this.value == ''){this.value='Username'}"/>
 
             <b>Pick a pasword:</b>
-            <input name="pass" type="password" />
-            <input type="submit" value="Let's Go!">
-        </form>
-        <p/>
+            <input name="pass" type="password" id="pass-input" />
+            <input type="submit" value="Let's Go!" onClick="return empty()" />
+        </fieldset>
+    </form>
+    <p/>
 </div>
-
-
-
-

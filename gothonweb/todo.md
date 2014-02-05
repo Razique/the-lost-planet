@@ -1,4 +1,5 @@
 TODO
 ====
 
--   TODO: Finish Login system
+-   TODO: Save and process user password
+-   Implement user logout

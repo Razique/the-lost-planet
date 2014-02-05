@@ -1,6 +1,18 @@
 $def with (content)
 <html>
     <head>
+        <script>
+        function empty() {
+            var user;
+            var pass;
+            user = document.getElementById("user-input").value;
+            pass = document.getElementById("pass-input").value;
+            if (user == "" || pass == "") {
+                alert("Pick a password");
+                return false;
+            };
+        }
+        </script>
         <link rel="stylesheet" type="text/css" href="/static/stylesheet.css"/>
         <title>Gothons From Planet Percal #25</title>
     </head>
