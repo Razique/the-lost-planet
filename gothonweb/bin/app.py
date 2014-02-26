@@ -59,12 +59,21 @@ class Rooms(object):
 
     def POST(self):
         user = web.input(username=None)
-        if user.username:
-            # Username init
-            session.user = sanitize(user.username)
-            web.seeother("/rooms")
+        password = web.input(password=None)
+        resume = web.input(resume=None)
+
+        if not resume.resume:
+            if user.username and password.password:
+                # Username and password init
+                session.user = sanitize(user.username)
+                session.password = sanitize(password.password)
+                web.seeother("/rooms")
+
+            else:
+                web.seeother("/")
+
         else:
-            web.seeother("/")
+            return "welcome back"
 
 
 class GameEngine(object):

@@ -2,18 +2,35 @@
     <img src=static/armory.jpg>
 </div>
 
-<div id="container_intro">
-    <form method="post" action="/rooms">
+<div id="container_user_new">
+    <form method="post" action="/rooms" onsubmit="return handle_inputs(1)">
         <fieldset>
-            <legend>Login</legend>
+            <legend>First time?</legend>
             <b>Pick a username:</b>
-            <input name="username"type="text" id="user-input" value="Username"
-                   onfocus="if(this.value == 'Username') {this.value=''}"
-                   onblur="if(this.value == ''){this.value='Username'}"/>
+            <input name="username"type="text" id="user_new" value="Username"
+            onfocus="if(this.value == 'Username') {this.value=''}"
+            onblur="if(this.value == ''){this.value='Username'}"/>
 
-            <b>Pick a pasword:</b>
-            <input name="pass" type="password" id="pass-input" />
-            <input type="submit" value="Let's Go!" onClick="return empty()" />
+            <b>Pick a password:</b>
+            <input name="password" type="password" id="pass_new" />
+            <input type="submit" value="Let's Go!" />
+        </fieldset>
+    </form>
+    <p/>
+</div>
+<div id="container_user_resume">
+    <form method="post" action="/rooms" onsubmit=" return handle_inputs()">
+        <fieldset>
+            <legend>Resume Your Game</legend>
+            <b>Enter your username:</b>
+            <input name="username" type="text" id="user_resume" value="Username"
+            onfocus="if(this.value == 'Username') {this.value=''}"
+            onblur="if(this.value == ''){this.value='Username'}"/>
+
+            <b>Enter your password:</b>
+            <input name="password" type="password" id="pass_resume" />
+            <input name="resume" type="hidden" value="1" />
+            <input type="submit" value="Resume" />
         </fieldset>
     </form>
     <p/>

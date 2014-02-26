@@ -1,27 +1,44 @@
 $def with (content)
 <html>
-    <head>
-        <script>
-        function empty() {
-            var user;
-            var pass;
-            user = document.getElementById("user-input").value;
-            pass = document.getElementById("pass-input").value;
-            if (user == "" || pass == "") {
-                alert("Pick a password");
-                return false;
-            };
-        }
-        </script>
-        <link rel="stylesheet" type="text/css" href="/static/stylesheet.css"/>
-        <title>Gothons From Planet Percal #25</title>
-    </head>
-    <body>
-        <h1>Gothons From Planet Percal #25</h1>
-        $:content
-        <hr/>
-        <div id="footer">
-        </div>
+<head>
+    <script>
+        function handle_inputs(validate_new) {
+            var user_new = document.getElementById("user_new").value;
+            var pass_new = document.getElementById("pass_new").value;
+            var user_resume = document.getElementById("user_resume").value;
+            var pass_resume = document.getElementById("pass_resume").value;
 
-    </body>
+            if ( validate_new == 1){
+               if (user_new == "" || pass_new == "") {
+                   alert("Pick a password");
+                   return false
+               } else if (user_new == "Username") {
+                   alert("Enter a username");
+                   return false
+               }
+           }
+           else {
+                if (user_resume == "" || pass_resume == "") {
+                    alert("Pick a password");
+                    return false
+                } else if (user_resume == "Username") {
+                    alert("Enter a username");
+                    return false
+                }
+
+            }
+        }
+
+</script>
+<link rel="stylesheet" type="text/css" href="/static/stylesheet.css"/>
+<title>Gothons From Planet Percal #25</title>
+</head>
+<body>
+    <h1>Gothons From Planet Percal #25</h1>
+    $:content
+    <hr/>
+    <div id="footer">
+    </div>
+
+</body>
 </html>
