@@ -39,11 +39,13 @@ $def with (room, picture, attempts, user)
     </div>
 </div>
 <br/>
-<div id="options">
-    <div id="change_room">
-        <a href="rooms">Change Room</a>
+
+$if user:
+    <div id="options">
+        <div id="logout">
+            <a href="logout">Logout</a>
+        </div>
+        <div id="change_room">
+            <a href="rooms">Change Room</a>
+        </div>
     </div>
-    <div id="change_user">
-        <a href="/?change=1">Change Name</a>
-    </div>
-</div>

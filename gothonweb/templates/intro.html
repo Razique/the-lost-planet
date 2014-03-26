@@ -1,9 +1,15 @@
+$def with (display, message)
+
 <div id="picture">
     <img src=static/armory.jpg>
 </div>
 
+<div id="message" style="display: $display">
+    $message
+</div>
+
 <div id="container_user_new">
-    <form method="post" action="/rooms" onsubmit="return handle_inputs(1)">
+    <form method="post" action="/login" onsubmit="return handle_inputs(1)">
         <fieldset>
             <legend>First time?</legend>
             <b>Pick a username:</b>
@@ -18,11 +24,13 @@
     </form>
     <p/>
 </div>
+
 <div id="container_user_resume">
-    <form method="post" action="/rooms" onsubmit=" return handle_inputs()">
+    <form method="post" action="/login" onsubmit=" return handle_inputs()">
         <fieldset>
             <legend>Resume Your Game</legend>
             <b>Enter your username:</b>
+            <input name="resume" type="hidden" value="1" />
             <input name="username" type="text" id="user_resume" value="Username"
             onfocus="if(this.value == 'Username') {this.value=''}"
             onblur="if(this.value == ''){this.value='Username'}"/>

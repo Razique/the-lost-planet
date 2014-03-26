@@ -3,23 +3,33 @@ sys.path.append('../')
 import web
 import glob
 import random
+import hashlib
+import logging
+import db_controllers
+
 from gothonweb import map, game_lexicon
 from sanitize import sanitize
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 web.config.debug = False
 
 # Routes definition
 urls = (
+    '/', 'Index',
     '/game', 'GameEngine',
     '/rooms', 'Rooms',
-    '/', 'Index',
+    '/login', 'Login',
+    '/logout', 'Logout',
 )
 app = web.application(urls, globals())
 
 if web.config.get('__session') is None:
     store = web.session.DiskStore('sessions')
     # Session init
-    session = web.session.Session(app, store, initializer={'room': None, 'attempts': None, 'user': None})
+    session = web.session.Session(app, store, initializer={'room': None, 'attempts': None, 'user': None,
+                                                           'logged': None})
     web.config.__session = session
 else:
     session = web.config.__session
@@ -34,17 +44,62 @@ class Index(object):
 
     @staticmethod
     def GET():
-        # User can change the username
-        change_user = web.input(change=None)
         session.room = map.START
         session.attempts = 5
-        if session.user:
-            if change_user.change:
-                return render.intro()
-            else:
-                web.seeother("/rooms")
+        return render.intro(display="none", message=None)
+
+
+class Login(object):
+    def __init__(self):
+        self.display = "block"
+        self.message_user_already_exists = "Sorry! This user already exists; please try again."
+        self.message_user_not_found = "Sorry! This user has not been found. Please try again."
+
+    @staticmethod
+    def GET():
+        web.seeother("/")
+
+    def POST(self):
+        user = web.input(username=None)
+        password = web.input(password=None)
+        resume = web.input(resume=None)
+
+        # Data sanitizing
+        c_user = sanitize(user.username)
+        c_password = hashlib.md5(sanitize(password.password)).hexdigest()
+
+        if not resume.resume:
+            # New user
+            if user.username and password.password:
+                # Does the user already exist?
+                if db_controllers.user_exists(c_user, c_password) is False:
+                    return render.intro(self.display, self.message_user_already_exists)
+                else:
+                    # User creation
+                    db_controllers.create_user(c_user, c_password)
+                    session.logged = True
+                    session.user = c_user
+                    # We redirect the user
+                    web.seeother("/rooms")
         else:
-            return render.intro()
+            # Does the user exist?
+            if db_controllers.user_exists(c_user, c_password) is False:
+                session.logged = True
+                session.user = c_user
+                web.seeother("/rooms")
+            else:
+                return render.intro(self.display, self.message_user_not_found)
+
+
+class Logout(object):
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def GET():
+        if session.logged:
+            session.kill()
+            web.seeother("/")
 
 
 class Rooms(object):
@@ -53,27 +108,9 @@ class Rooms(object):
 
     def GET(self):
         # If the user called the URL directly, we redirect him
-        if session.user is None:
+        if session.logged is None:
             web.seeother("/")
         return render.list_rooms(self.rooms.return_rooms(), username=session.user)
-
-    def POST(self):
-        user = web.input(username=None)
-        password = web.input(password=None)
-        resume = web.input(resume=None)
-
-        if not resume.resume:
-            if user.username and password.password:
-                # Username and password init
-                session.user = sanitize(user.username)
-                session.password = sanitize(password.password)
-                web.seeother("/rooms")
-
-            else:
-                web.seeother("/")
-
-        else:
-            return "welcome back"
 
 
 class GameEngine(object):
@@ -149,6 +186,7 @@ class GameEngine(object):
                 return render.you_died()
         else:
             return self.view
+
 
 if __name__ == "__main__":
     app.run()

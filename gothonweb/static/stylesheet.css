@@ -16,7 +16,7 @@ fieldset {
 }
 
 
-#change_room, #change_user{
+#change_room, #logout{
 	background: url("room-icon.png") no-repeat;
 	width: 100px;
 	height: 25px;
@@ -25,12 +25,13 @@ fieldset {
 	float: left;
 }
 
-#change_user {
-	background: url("user-icon.png") no-repeat;
+
+#logout {
+    background: url("logout-icon.png") no-repeat;
 }
 
 #options {
-	width: 280px;
+	width: 420px;
 	height: 50px;
 	margin-left: auto;
 	margin-right: auto;
@@ -156,4 +157,15 @@ input[type="submit"]:hover {
 	background-color: black;
 	color: white
 
+}
+
+#message {
+    background: #F33636;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: #FCFCFC;
 }

@@ -1,6 +1,8 @@
 $def with (content)
+
 <html>
 <head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script>
         function handle_inputs(validate_new) {
             var user_new = document.getElementById("user_new").value;
@@ -25,20 +27,20 @@ $def with (content)
                     alert("Enter a username");
                     return false
                 }
-
             }
         }
-
-</script>
+    </script>
+    <script>
+        jQuery(document).ready(function() {
+           jQuery('#message').delay(2000).fadeOut(400);
+        });
+    </script>
 <link rel="stylesheet" type="text/css" href="/static/stylesheet.css"/>
 <title>Gothons From Planet Percal #25</title>
 </head>
-<body>
-    <h1>Gothons From Planet Percal #25</h1>
-    $:content
-    <hr/>
-    <div id="footer">
-    </div>
-
-</body>
+    <body>
+        <h1>Gothons From Planet Percal #25</h1>
+        $:content
+        <div id="footer"></div>
+    </body>
 </html>
