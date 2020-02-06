@@ -170,7 +170,7 @@ class GameEngine(object):
         if process.action:
             if self.lexicon.parse_lexicon(process.action, session.room.name, test=False) is not False:
                 session.room = session.room.go(self.lexicon.parse_lexicon(process.action,
-                                                                          session.room.name, test=False))
+                        session.room.name, test=False))
                 web.seeother("/game")
             else:
                 return render.you_died()
